@@ -11,3 +11,19 @@ Web server are computers which delivers the requested web pages.Every web server
 
 ![fundamental](nginx_arch.png)
 
+# BASIC COMMANDS
+
+* Sudo systemctl status nginx
+* Sudo systemctl stop nginx
+* Sudo systemctl start nginx
+* Sudo systemctl reload nginx
+
+server {
+    location / {
+        root /data/www;
+    }
+
+    location /images/ {
+        root /data;
+    }
+}
