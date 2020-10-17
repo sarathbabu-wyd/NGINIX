@@ -1,6 +1,6 @@
 # OVERVIEW
 
-## WEB SERVER
+## WEB SERVER APPACHE
 
 Web server are computers which delivers the requested web pages.Every web server has an IP address and a Domain Name. EG:(XAMPP,Apache,NGINX,Tornado,Caddy,Microsoft IIS)
 
@@ -11,7 +11,7 @@ Web server are computers which delivers the requested web pages.Every web server
 
 ![fundamental](nginx_arch.png)
 
-# BASIC COMMANDS
+## BASIC COMMANDS
 
 * Sudo systemctl status nginx
 * Sudo systemctl stop nginx
@@ -27,3 +27,22 @@ server {
         root /data;
     }
 }
+
+# INSTALLATIION
+
+## SERVER OVERVIEW
+
+* Created an Instance in EC2 with the enabling PORT 20,80,443
+* By using the Public IP of EC2 instance login into machine using SS H command  
+  Eg:sudo ssh -i/home/sarath/Downloads/EC2Tutorial.pem ubuntu@52.66.105.255
+         
+## INSTALLING WITH A PACKAGE MANAGER 
+
+  UBUNTU
+* sudo apt-get update -clear
+* sudo apt-get install nginx -clear
+* ps aux | grep nginx (navigate to browser using nginx page)
+* ls -l /etc/nginx/
+
+  CENTOS
+*   
