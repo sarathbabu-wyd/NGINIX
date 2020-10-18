@@ -41,8 +41,34 @@ server {
   UBUNTU
 * sudo apt-get update -clear
 * sudo apt-get install nginx -clear
-* ps aux | grep nginx (navigate to browser using nginx page)
-* ls -l /etc/nginx/
+* ps aux | grep nginx (navigate to browser using IP into Nginx page)
+* ls -l /etc/nginx/ (To see conf files in nginx)
+* Download the nginx mainline version for nginx.org website.
+* wget (paste the link of mainline version) 
+* ls -l
+* tar -zxvf (paste tar file. eg:nginx -1.13.10.tar.gz)
+* ls -l
+* cd nginx-(type version as above)
+* we need to install a compiler to compile source code
+* sudo apt-get install build-essential   -clear (to test ./configure)
+* sudo apt-get install libpcre3 libpre3-dev zlib1g zlib1g-dev libssl-dev(pcre library)
 
-  CENTOS
-*   
+## CUSTOM CONFIGURATION COMMAND
+
+* sudo ./configure --sbin-path=/usr/bin/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --with-pcre --pid-path=/var/run/nginx.pid --with-http_ssl_module
+* Make
+* sudo install make    --ls -l /etc/nginx (to check the conf file exit)
+* nginx     --ps aux | grep nginx
+
+## SYSTEMD SERVICE(Managing a better way Nginx)
+
+* ps aux | grep nginx (check nginx is running)
+* nginx -h (commands for help version)
+* nginx -s stop    ----ps aux | grep nginx
+* touch /lib/systemd/system/nginx.service
+* sudo nano /lib/systemd/system/nginx.service
+* systemctl start nginx
+* ps aux | grep nginx
+* systemctl stop nginx(load the web page)
+* systemctl enable nginx
+* reboot   (To login again type ssh command)
