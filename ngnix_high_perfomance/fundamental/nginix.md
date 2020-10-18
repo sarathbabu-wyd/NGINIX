@@ -73,6 +73,6 @@ server {
 * systemctl enable nginx
 * reboot   (To login again type ssh command)
 
+
 # CONFIGURATION
 
-* 
