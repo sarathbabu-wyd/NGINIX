@@ -76,3 +76,176 @@ server {
 
 # CONFIGURATION
 
+* ls -l  /sites/demo/ ( create a directory)
+* Upload three files into it(index.html,style.css,thump.png)
+* ls -l /etc/nginx/( file to edit is nginx.conf)
+* sudo nano nginx.conf
+  ``` events {}
+      
+      http {
+         
+         include mime.types;
+
+         server {
+
+           listen 80;
+           server_name IP:
+
+           root /sites/demo;
+         }
+      } ```
+* nginx -t
+* systemctl reload nginx
+* curl -I http://IP/style.css
+* Reload the browser
+
+## LOCATION BLOCKS
+
+* Exact match  =uri
+* Preferential Prefix match  ^~
+* Regex Match   ~*
+* Prefix match  uri
+  ``` events {}
+      
+      http {
+         
+         include mime.types;
+
+         server {
+
+           listen 80;
+           server_name IP:
+
+           root /sites/demo;
+
+           location /greet { 
+             return 200 'Hello from NGINX "/great" location.';
+           }  
+         }
+      } ```
+
+## VARIABLES
+
+CONFIGURATION VARIABLES- set $var 'something';
+NGINX MODULE VARIABLES-$http,$uri,$args
+
+``` 
+events {}
+
+http {
+
+  include mime.types;
+
+  server {
+
+    listen 80;
+    server_name 167.99.93.26;
+
+    root /sites/demo;
+
+    set $mon 'No';
+
+    # Check if weekend
+    if ( $date_local ~ 'Monday' ) {
+      set $mon 'Yes';
+    }
+
+
+
+    location /is_monday {
+
+      return 200 $mon;
+    }
+  }
+ }
+  ```
+* Sudo systemctl upload nginx
+* Reload the browser page  IP/is_monday
+
+## REWRITES AND REDIRECTS
+
+* Rewrite pattern URI
+* Return status  URI
+
+ events {}
+
+http {
+
+  include mime.types;
+
+  server {
+
+    listen 80;
+    server_name 167.99.93.26;
+
+    root /sites/demo;
+
+    location /logo {
+
+      return 307 /thump.png;
+    }
+  }
+}   
+
+REWRITES
+
+events {}
+
+http {
+
+  include mime.types;
+
+  server {
+
+    listen 80;
+    server_name 167.99.93.26;
+
+    root /sites/demo;
+
+    rewrite ^/user/(\w+) /greet/$1 last;
+    rewrite ^/greet/john /thumb.png;
+
+    location /greet {
+
+      return 200 "Hello User";
+    }
+
+    location = /greet/john {
+      return 200 "Hello John";
+    }
+  }
+}
+## TRY FILES AND NAMED LOCATION
+
+* events {}
+
+http {
+
+  include mime.types;
+
+  server {
+
+    listen 80;
+    server_name 167.99.93.26;
+
+    root /sites/demo;
+
+    try_files /thump.png /greet; or try_files $uri /cat.png /greet;
+
+    location /greet{
+      return 200 "Hello user";
+    }
+  }
+}
+## LOGGING
+
+* Error log
+* Access log
+
+* ls -l /var/log/nginx/
+* cd /var/log/nginx/
+* echo ''> access.log
+* echo ''> error log
+* ls -l
+* cat access.log
+
